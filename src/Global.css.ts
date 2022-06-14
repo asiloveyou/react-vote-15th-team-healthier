@@ -1,6 +1,11 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+  *{
+    textarea:focus, input:focus{
+      outline: none;
+  }
+
   body {
     margin: 0;
     padding: 0;
