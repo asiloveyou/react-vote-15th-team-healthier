@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Login from "./pages/Login";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const AppContainer = styled.div`
   background-image: radial-gradient(
@@ -9,7 +11,7 @@ const AppContainer = styled.div`
     rgba(239, 61, 78, 0.81) 51.8%,
     rgba(239, 61, 78, 0.63) 84.6%
   );
-  // background-color: blue;
+
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -20,9 +22,14 @@ const AppContainer = styled.div`
 `;
 
 function App() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/login/");
+  }, []);
+
   return (
     <AppContainer>
-      <Login />
+      <Outlet />
     </AppContainer>
   );
 }

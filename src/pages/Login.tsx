@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const ModalContainer = styled.div`
@@ -93,13 +94,15 @@ function Login() {
   const [username, setUserName] = useState<string>();
   const [password, setPassword] = useState<string>();
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
 
   return (
     <>
-      <Title>오늘도 사랑해</Title>
+      <Title>오늘도 반가워</Title>
       <ModalContainer>
         <Form onSubmit={handleSubmit}>
           <InputSection>
@@ -116,7 +119,15 @@ function Login() {
           </InputSection>
           <ButtonSection>
             <LoginButton type="submit">로그인</LoginButton>
-            <SignUpButton type="button">회원가입</SignUpButton>
+            <SignUpButton
+              type="button"
+              onClick={() => {
+                console.log("clicked");
+                navigate("/signup");
+              }}
+            >
+              회원가입
+            </SignUpButton>
           </ButtonSection>
         </Form>
       </ModalContainer>
