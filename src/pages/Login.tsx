@@ -47,6 +47,7 @@ const SignUpButton = styled(Button)`
   background-color: rgba(255, 255, 255, 0.5);
   &:hover {
     box-shadow: 0 0 1rem 0.04rem rgba(239, 61, 78, 0.3);
+    color: rgba(239, 61, 78, 0.9);
   }
 `;
 
@@ -118,7 +119,6 @@ function Login() {
             ></Input>
           </InputSection>
           <ButtonSection>
-            <LoginButton type="submit">로그인</LoginButton>
             <SignUpButton
               type="button"
               onClick={() => {
@@ -128,6 +128,7 @@ function Login() {
             >
               회원가입
             </SignUpButton>
+            <LoginButton type="submit">로그인</LoginButton>
           </ButtonSection>
         </Form>
       </ModalContainer>
