@@ -34,18 +34,18 @@ const Button = styled.button`
 `;
 
 const LoginButton = styled(Button)`
-  background-color: rgba(239, 61, 78, 0.8);
+  background-color: ${({ theme }) => theme.blue};
   color: white;
   &:hover {
-    box-shadow: 0 0 1rem 0.04rem rgba(239, 61, 78, 0.3);
+    box-shadow: 0 0 0.5rem 0.04rem rgba(0, 0, 0, 0.2);
   }
 `;
 
 const SignUpButton = styled(Button)`
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: ${({ theme }) => theme.light_blue};
+  color: ${({ theme }) => theme.blue};
   &:hover {
-    box-shadow: 0 0 1rem 0.04rem rgba(239, 61, 78, 0.3);
-    color: rgba(239, 61, 78, 0.9);
+    box-shadow: 0 0 0.5rem 0.04rem rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -62,13 +62,11 @@ const Input = styled.input`
   padding: 1rem;
   margin: 0.5rem;
 
-  box-shadow: 0 0.4rem 0.5rem 0.04rem rgba(0, 0, 0, 0.02);
-
   border-radius: 1rem;
   border: none;
 
   &:hover {
-    box-shadow: 0 0 1rem 0.04rem rgba(239, 61, 78, 0.3);
+    box-shadow: 0 0 0.5rem 0.04rem rgba(0, 0, 0, 0.2);
   }
 `;
 
