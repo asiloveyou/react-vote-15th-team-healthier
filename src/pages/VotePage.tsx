@@ -3,6 +3,7 @@ import { frontList, backList } from "../config/PartList";
 import styled from "styled-components";
 import ToggleButtons from "../components/ToggleButtons";
 import { IPartList } from "../config/interface";
+import Heart from "../components/Heart";
 
 const Container = styled.div`
   height: 100vh;
@@ -12,43 +13,90 @@ const Container = styled.div`
   align-items: center;
 `;
 const VoteList = styled.div`
-  margin: 5rem;
+  margin-top: 5rem;
 
   display: grid;
   grid-gap: 7rem;
   grid-template-columns: 1fr 1fr 1fr;
 `;
-const VoteItem = styled.div`
+const VoteName = styled.button`
+  font-size: 1.5rem;
+  font-weight: 200;
+
+  border: none;
+  background-color: ${({ theme }) => theme.black};
+  color: ${({ theme }) => theme.gray};
+
+  cursor: pointer;
+`;
+const VoteItem = styled.div<{ voteNumber: number; part: number }>`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  position: relative;
 
   width: 8rem;
   padding-bottom: 0.5rem;
 
-  border-bottom: 0.01rem solid ${({ theme }) => theme.gray};
+  border-bottom: 0.01rem solid
+    ${({ voteNumber, part, theme }) =>
+      part === voteNumber ? theme.red : theme.gray};
+  ${VoteName} {
+    color: ${({ voteNumber, part, theme }) =>
+      part === voteNumber ? theme.red : theme.gray};
+  }
+
+  &:hover {
+    border-bottom: 0.01rem solid ${({ theme }) => theme.red};
+    transition: 0.5s;
+    ${VoteName} {
+      color: ${({ theme }) => theme.red};
+      transition: 0.5s;
+    }
+  }
+`;
+const VoteComment = styled.div`
+  font-size: 1rem;
+  font-weight: 200;
   color: ${({ theme }) => theme.gray};
 
-  font-size: 1.5rem;
-  font-weight: 200;
-
-  cursor: pointer;
+  margin-top: 0.5rem;
 `;
 
 const VotePage = () => {
   const [curPart, setCurPart] = useState(1);
   const [partList, setPartList] = useState<IPartList[]>([]);
+  const [voteNumber, setVoteNumber] = useState(-1);
 
   useEffect(() => {
     setPartList(curPart === 1 ? frontList : backList);
   }, [curPart]);
 
+  useEffect(() => {
+    const handleVote = setTimeout(() => setVoteNumber(-1), 2000);
+
+    return () => clearTimeout(handleVote);
+  }, [voteNumber]);
+
   return (
     <Container>
       <ToggleButtons curPart={curPart} setCurPart={setCurPart} />
+      <VoteComment>
+        당신의 {curPart === 1 ? "프" : "백"}짱에게 투표하세요!
+      </VoteComment>
       {partList.length !== 0 && (
         <VoteList>
           {partList.map((part) => (
-            <VoteItem key={part.id}>{part.name}</VoteItem>
+            <VoteItem key={part.id} voteNumber={voteNumber} part={part.id}>
+              <VoteName
+                disabled={voteNumber !== -1}
+                onClick={() => setVoteNumber(part.id)}
+              >
+                {part.name}
+              </VoteName>
+              {voteNumber === part.id && <Heart />}
+            </VoteItem>
           ))}
         </VoteList>
       )}

@@ -38,6 +38,11 @@ const VoteTab = styled.section`
   & + & {
     margin-left: 2rem;
   }
+
+  &:hover {
+    color: ${({ theme }) => theme.light_blue};
+    transition: 0.5s;
+  }
 `;
 const RightContent = styled.section`
   font-size: 1rem;
@@ -55,7 +60,7 @@ const Header = () => {
   return (
     <Container>
       <LeftContent>
-        <Logo src="/healthier_logo.png" />
+        <Logo src="/healthier_logo.png" onClick={() => navigate("/")} />
         <VoteTab onClick={() => navigate("/vote")}>투표하기</VoteTab>
         <VoteTab onClick={() => navigate("/voteResult")}>결과보기</VoteTab>
       </LeftContent>
