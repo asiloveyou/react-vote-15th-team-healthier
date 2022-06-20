@@ -28,6 +28,10 @@ const VoteName = styled.button`
   color: ${({ theme }) => theme.gray};
 
   cursor: pointer;
+
+  :disabled {
+    cursor: default;
+  }
 `;
 const VoteItem = styled.div<{ voteNumber: number; part: number }>`
   display: flex;
