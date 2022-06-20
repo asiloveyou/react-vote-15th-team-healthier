@@ -1,29 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { frontList, backList } from "../config/PartList";
 import styled from "styled-components";
 import ToggleButtons from "../components/ToggleButtons";
-
-const frontList = [
-  "김채림",
-  "신성우",
-  "오민지",
-  "유세은",
-  "전시원",
-  "정대헌",
-  "주효정",
-  "최어진",
-  "한규진",
-];
-const backList = [
-  "김경민",
-  "김도연",
-  "김민준",
-  "김아연",
-  "백지훈",
-  "신예진",
-  "원소윤",
-  "정수진",
-  "주어진사랑",
-];
 
 const Container = styled.div`
   height: 100vh;

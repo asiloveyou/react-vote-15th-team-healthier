@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import VotePage from "./pages/VotePage";
 import GlobalStyle from "./Global.css";
-import theme from "./theme";
+import theme from "./config/theme";
 import { ThemeProvider } from "styled-components";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
