@@ -3,6 +3,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+const Container = styled.div`
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 const ModalContainer = styled.div`
   max-width: 40rem;
   max-height: 30rem;
@@ -100,7 +109,7 @@ function Login() {
   };
 
   return (
-    <>
+    <Container>
       <Title>오늘도 반가워</Title>
       <ModalContainer>
         <Form onSubmit={handleSubmit}>
@@ -130,7 +139,7 @@ function Login() {
           </ButtonSection>
         </Form>
       </ModalContainer>
-    </>
+    </Container>
   );
 }
 

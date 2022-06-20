@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import VotePage from "./pages/VotePage";
 import GlobalStyle from "./Global.css";
 import theme from "./theme";
 import { ThemeProvider } from "styled-components";
@@ -18,6 +19,7 @@ root.render(
           <Route path="/" element={<App />}>
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
+            <Route path="vote" element={<VotePage />} />
             <Route
               path="*"
               element={

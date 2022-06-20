@@ -2,6 +2,15 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+const Container = styled.div`
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 const ModalContainer = styled.div`
   max-width: 40rem;
   max-height: 30rem;
@@ -109,7 +118,7 @@ function SignUp() {
   };
 
   return (
-    <>
+    <Container>
       <ModalContainer>
         <Form onSubmit={handleSubmit}>
           <InputSection>
@@ -150,7 +159,7 @@ function SignUp() {
           </ButtonSection>
         </Form>
       </ModalContainer>
-    </>
+    </Container>
   );
 }
 
