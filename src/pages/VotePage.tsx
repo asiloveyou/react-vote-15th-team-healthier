@@ -12,25 +12,26 @@ const Container = styled.div`
   align-items: center;
 `;
 const VoteList = styled.div`
-  margin-top: 2rem;
+  margin: 5rem;
+
+  display: grid;
+  grid-gap: 7rem;
+  grid-template-columns: 1fr 1fr 1fr;
 `;
-const VoteItem = styled.section`
+const VoteItem = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 
-  width: 10rem;
-
+  width: 8rem;
   padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-  margin-bottom: 1.7rem;
 
   border-bottom: 0.01rem solid ${({ theme }) => theme.gray};
-`;
-const VoteName = styled.div`
   color: ${({ theme }) => theme.gray};
 
   font-size: 1.5rem;
   font-weight: 200;
+
+  cursor: pointer;
 `;
 
 const VotePage = () => {
@@ -44,13 +45,13 @@ const VotePage = () => {
   return (
     <Container>
       <ToggleButtons curPart={curPart} setCurPart={setCurPart} />
-      <VoteList>
-        {partList.map((part) => (
-          <VoteItem key={part.id}>
-            <VoteName>{part.name}</VoteName>
-          </VoteItem>
-        ))}
-      </VoteList>
+      {partList.length !== 0 && (
+        <VoteList>
+          {partList.map((part) => (
+            <VoteItem key={part.id}>{part.name}</VoteItem>
+          ))}
+        </VoteList>
+      )}
     </Container>
   );
 };

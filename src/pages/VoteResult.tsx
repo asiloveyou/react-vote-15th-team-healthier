@@ -53,12 +53,13 @@ const VoteResult = () => {
     <Container>
       <ToggleButtons curPart={curPart} setCurPart={setCurPart} />
       <VoteList>
-        {partList.map((part) => (
-          <VoteItem key={part.id}>
-            <VoteName>{part.name}</VoteName>
-            <VoteNumber>123표</VoteNumber>
-          </VoteItem>
-        ))}
+        {partList.length !== 0 &&
+          partList.map((part) => (
+            <VoteItem key={part.id}>
+              <VoteName>{part.name}</VoteName>
+              <VoteNumber>123표</VoteNumber>
+            </VoteItem>
+          ))}
       </VoteList>
     </Container>
   );
