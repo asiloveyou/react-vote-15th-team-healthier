@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Outlet, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import Header from "./components/layout/Header";
 
 const AppContainer = styled.div`

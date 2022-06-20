@@ -20,6 +20,7 @@ const VoteItem = styled.section`
 
   width: 20rem;
   font-weight: 200;
+  font-size: 1.5rem;
 
   padding-bottom: 0.5rem;
   margin-bottom: 1.7rem;
@@ -28,11 +29,9 @@ const VoteItem = styled.section`
   color: ${({ theme }) => theme.gray};
 `;
 const VoteName = styled.section`
-  font-size: 1.5rem;
   padding-left: 0.5rem;
 `;
 const VoteNumber = styled.section`
-  font-size: 1.5rem;
   padding-right: 0.5rem;
   color: ${({ theme }) => theme.red};
 `;
