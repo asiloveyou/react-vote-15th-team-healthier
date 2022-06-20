@@ -5,6 +5,7 @@ import App from "./App";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import VotePage from "./pages/VotePage";
+import VoteResult from "./pages/VoteResult";
 import GlobalStyle from "./Global.css";
 import theme from "./config/theme";
 import { ThemeProvider } from "styled-components";
@@ -20,6 +21,7 @@ root.render(
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="vote" element={<VotePage />} />
+            <Route path="voteResult" element={<VoteResult />} />
             <Route
               path="*"
               element={

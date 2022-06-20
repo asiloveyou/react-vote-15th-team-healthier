@@ -57,7 +57,7 @@ const Header = () => {
       <LeftContent>
         <Logo src="/healthier_logo.png" />
         <VoteTab onClick={() => navigate("/vote")}>투표하기</VoteTab>
-        <VoteTab>결과보기</VoteTab>
+        <VoteTab onClick={() => navigate("/voteResult")}>결과보기</VoteTab>
       </LeftContent>
       <RightContent
         onClick={() => {

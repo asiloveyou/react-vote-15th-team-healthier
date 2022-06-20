@@ -1,10 +1,6 @@
-import React, { Dispatch } from "react";
+import React from "react";
 import styled from "styled-components";
-
-interface IToggleButtons {
-  curPart: number;
-  setCurPart: Dispatch<number>;
-}
+import { IToggleButtons } from "../config/interface";
 
 const ToggleButtonBox = styled.div`
   display: flex;

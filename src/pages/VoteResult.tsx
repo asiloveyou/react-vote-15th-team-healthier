@@ -18,22 +18,30 @@ const VoteItem = styled.section`
   display: flex;
   justify-content: space-between;
 
-  width: 10rem;
+  width: 20rem;
 
   padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
   margin-bottom: 1.7rem;
 
   border-bottom: 0.01rem solid ${({ theme }) => theme.gray};
+  color: ${({ theme }) => theme.gray};
 `;
 const VoteName = styled.div`
-  color: ${({ theme }) => theme.gray};
-
   font-size: 1.5rem;
   font-weight: 200;
+
+  padding-left: 0.5rem;
+`;
+const VoteNumber = styled.div`
+  font-size: 1.5rem;
+  font-weight: 200;
+
+  padding-right: 0.5rem;
+
+  color: ${({ theme }) => theme.red};
 `;
 
-const VotePage = () => {
+const VoteResult = () => {
   const [curPart, setCurPart] = useState(1);
   const [partList, setPartList] = useState<IPartList[]>([]);
 
@@ -48,6 +56,7 @@ const VotePage = () => {
         {partList.map((part) => (
           <VoteItem key={part.id}>
             <VoteName>{part.name}</VoteName>
+            <VoteNumber>123표</VoteNumber>
           </VoteItem>
         ))}
       </VoteList>
@@ -55,4 +64,4 @@ const VotePage = () => {
   );
 };
 
-export default VotePage;
+export default VoteResult;
