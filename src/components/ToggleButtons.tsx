@@ -9,6 +9,7 @@ const ToggleButtonBox = styled.div`
 `;
 const ToggleButton = styled.button<{ part: number; curPart: number }>`
   cursor: pointer;
+
   border: 0.01rem solid ${({ theme }) => theme.light_green};
   border-radius: ${({ part }) =>
     part === 1 ? "0.5rem 0 0 0.5rem" : "0 0.5rem 0.5rem 0"};
@@ -20,15 +21,29 @@ const ToggleButton = styled.button<{ part: number; curPart: number }>`
 
   padding: 0.8rem;
   width: 7rem;
+
+  :disabled {
+    cursor: default;
+  }
 `;
 
 const ToggleButtons = ({ curPart, setCurPart }: IToggleButtons) => {
   return (
     <ToggleButtonBox>
-      <ToggleButton part={1} curPart={curPart} onClick={() => setCurPart(1)}>
+      <ToggleButton
+        disabled={curPart === 1}
+        part={1}
+        curPart={curPart}
+        onClick={() => setCurPart(1)}
+      >
         프론트엔드
       </ToggleButton>
-      <ToggleButton part={2} curPart={curPart} onClick={() => setCurPart(2)}>
+      <ToggleButton
+        disabled={curPart === 2}
+        part={2}
+        curPart={curPart}
+        onClick={() => setCurPart(2)}
+      >
         백엔드
       </ToggleButton>
     </ToggleButtonBox>

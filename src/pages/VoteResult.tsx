@@ -4,14 +4,14 @@ import styled from "styled-components";
 import ToggleButtons from "../components/ToggleButtons";
 import { IPartList } from "../config/interface";
 
-const Container = styled.div`
+const Container = styled.article`
   height: 100vh;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-const VoteList = styled.div`
+const VoteList = styled.section`
   margin-top: 2rem;
 `;
 const VoteItem = styled.section`
@@ -27,11 +27,11 @@ const VoteItem = styled.section`
   border-bottom: 0.01rem solid ${({ theme }) => theme.gray};
   color: ${({ theme }) => theme.gray};
 `;
-const VoteName = styled.div`
+const VoteName = styled.section`
   font-size: 1.5rem;
   padding-left: 0.5rem;
 `;
-const VoteNumber = styled.div`
+const VoteNumber = styled.section`
   font-size: 1.5rem;
   padding-right: 0.5rem;
   color: ${({ theme }) => theme.red};

@@ -6,6 +6,8 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import VotePage from "./pages/VotePage";
 import VoteResult from "./pages/VoteResult";
+import ErrorPage from "./pages/ErrorPage";
+import HomePage from "./pages/HomePage";
 import GlobalStyle from "./Global.css";
 import theme from "./config/theme";
 import { ThemeProvider } from "styled-components";
@@ -18,18 +20,12 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
+            <Route path="" element={<HomePage />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="vote" element={<VotePage />} />
             <Route path="voteResult" element={<VoteResult />} />
-            <Route
-              path="*"
-              element={
-                <main style={{ padding: "1rem" }}>
-                  <p style={{ color: "white" }}>잘못된 경로입니다</p>
-                </main>
-              }
-            />
+            <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

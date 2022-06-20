@@ -5,14 +5,14 @@ import ToggleButtons from "../components/ToggleButtons";
 import { IPartList } from "../config/interface";
 import Heart from "../components/Heart";
 
-const Container = styled.div`
+const Container = styled.article`
   height: 100vh;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-const VoteList = styled.div`
+const VoteList = styled.section`
   margin-top: 5rem;
 
   display: grid;
@@ -33,7 +33,7 @@ const VoteName = styled.button`
     cursor: default;
   }
 `;
-const VoteItem = styled.div<{ voteNumber: number; part: number }>`
+const VoteItem = styled.section<{ voteNumber: number; part: number }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,7 +60,7 @@ const VoteItem = styled.div<{ voteNumber: number; part: number }>`
     }
   }
 `;
-const VoteComment = styled.div`
+const VoteComment = styled.p`
   font-size: 1rem;
   font-weight: 200;
   color: ${({ theme }) => theme.gray};
@@ -78,10 +78,14 @@ const VotePage = () => {
   }, [curPart]);
 
   useEffect(() => {
-    const handleVote = setTimeout(() => setVoteNumber(-1), 2000);
+    const handleVote = setTimeout(() => setVoteNumber(-1), 1000);
 
     return () => clearTimeout(handleVote);
   }, [voteNumber]);
+
+  const handleVoting = (id: number) => {
+    setVoteNumber(id);
+  };
 
   return (
     <Container>
@@ -89,21 +93,20 @@ const VotePage = () => {
       <VoteComment>
         당신의 {curPart === 1 ? "프" : "백"}짱에게 투표하세요!
       </VoteComment>
-      {partList.length !== 0 && (
-        <VoteList>
-          {partList.map((part) => (
+      <VoteList>
+        {partList.length !== 0 &&
+          partList.map((part) => (
             <VoteItem key={part.id} voteNumber={voteNumber} part={part.id}>
               <VoteName
                 disabled={voteNumber !== -1}
-                onClick={() => setVoteNumber(part.id)}
+                onClick={() => handleVoting(part.id)}
               >
                 {part.name}
               </VoteName>
               {voteNumber === part.id && <Heart />}
             </VoteItem>
           ))}
-        </VoteList>
-      )}
+      </VoteList>
     </Container>
   );
 };

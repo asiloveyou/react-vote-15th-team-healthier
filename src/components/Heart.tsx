@@ -3,10 +3,10 @@ import styled, { keyframes } from "styled-components";
 
 const HeartAnimation = keyframes`
   0% {
-    transform: scale(1) rotate(45deg);
-  }
-  17.5% {
     transform: scale(0.5) rotate(45deg);
+  }
+  37.5% {
+    transform: scale(1.5) rotate(45deg);
   }
 `;
 const HeartImg = styled.div`
@@ -33,7 +33,7 @@ const HeartImg = styled.div`
     top: -50%;
   }
 
-  animation: ${HeartAnimation} 1.7s ease-in-out;
+  animation: ${HeartAnimation} 0.5s ease-in-out;
 `;
 
 const Heart = () => {

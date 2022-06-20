@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Login from "./pages/Login";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Header from "./components/layout/Header";
@@ -11,11 +10,6 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate("/login");
-  }, []);
-
   return (
     <AppContainer>
       <Header />

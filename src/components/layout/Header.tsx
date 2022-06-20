@@ -46,7 +46,7 @@ const VoteTab = styled.section`
 `;
 const RightContent = styled.section`
   font-size: 1rem;
-  margin-right: 1rem;
+  margin-right: 1.7rem;
 
   color: ${({ theme }) => theme.light_green};
 
