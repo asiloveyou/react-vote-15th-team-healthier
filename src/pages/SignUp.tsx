@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { customPost } from "../lib/post";
+import { setRefreshToken } from "../lib/cookie";
+import { SET_TOKEN } from "../store/auth";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div`
   height: 100vh;
@@ -139,26 +143,63 @@ const Description = styled.p`
 `;
 
 function SignUp() {
+  const [email, setEmail] = useState<string>();
   const [username, setUserName] = useState<string>();
-  const [id, setId] = useState<string>();
   const [password, setPassword] = useState<string>();
-  const [siwon, setSiwon] = useState<number>();
+  const [siwon, setSiwon] = useState<number>(-1);
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const sendSignUpRequest = useCallback(
+    async (link: string, email: string, id: string, pw: string) => {
+      const response = await customPost(link, {
+        email: email,
+        username: id,
+        password: pw,
+      });
+
+      if (response.message === "Sign up Success") {
+        setRefreshToken(response.refresh);
+        dispatch(SET_TOKEN(response.access));
+        return navigate("/");
+      } else if (response.non_field_errors) {
+        if (response.non_field_errors[0] === "EMAIL ALREADY EXIST") {
+          alert("이메일이 이미 존재합니다");
+        } else if (response.non_field_errors[0] === "USERNAME ALREADY EXIST") {
+          alert("이름이 이미 존재합니다");
+        }
+      } else if (response.email) {
+        alert("올바른 이메일을 입력해주세요");
+      } else {
+        alert("통신 오류");
+      }
+    },
+    [customPost, setRefreshToken, dispatch]
+  );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (siwon == 2) {
       alert("올바른 시원을 고르세요");
       return;
+    } else if (siwon == -1) {
+      alert("시원을 고르세요");
     }
+    sendSignUpRequest(
+      "http://ec2-43-200-125-15.ap-northeast-2.compute.amazonaws.com/api/signup",
+      email!,
+      username!,
+      password!
+    );
   };
 
   const onChangeName = (value: string) => {
     setUserName(value);
   };
 
-  const onChangeId = (value: string) => {
-    setId(value);
+  const onChangeEmail = (value: string) => {
+    setEmail(value);
   };
 
   const onChangePassword = (value: string) => {
@@ -172,17 +213,17 @@ function SignUp() {
         <Form onSubmit={handleSubmit}>
           <InputSection>
             <InputTitle>다음의 내용을 입력해주세요</InputTitle>
-            <Description>이름</Description>
+            <Description>이메일</Description>
             <Input
               type="text"
-              placeholder="이름"
-              onChange={(e) => onChangeName(e.target.value)}
+              placeholder="이메일"
+              onChange={(e) => setEmail(e.target.value)}
             ></Input>
             <Description>아이디</Description>
             <Input
               type="text"
               placeholder="아이디"
-              onChange={(e) => onChangeId(e.target.value)}
+              onChange={(e) => onChangeName(e.target.value)}
             ></Input>
             <Description>비밀번호</Description>
             <Input
