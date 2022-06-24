@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ToggleButtons from "../components/ToggleButtons";
-import { IPartList } from "../config/interface";
+import { IPartList } from "../lib/interface";
 import VoteResultList from "../components/voteResult/VoteResultList";
 
 const Container = styled.article`

@@ -1,5 +1,5 @@
 import React from "react";
-import { IPartList } from "../../config/interface";
+import { IPartList } from "../../lib/interface";
 import styled, { keyframes } from "styled-components";
 
 const VoteResultAnimation = keyframes`

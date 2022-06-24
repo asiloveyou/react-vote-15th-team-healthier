@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { IVoteList } from "../../config/interface";
+import { IVoteList } from "../../lib/interface";
 import styled from "styled-components";
 import Heart from "../Heart";
 import { useNavigate } from "react-router-dom";

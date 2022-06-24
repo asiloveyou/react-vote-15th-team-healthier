@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { IToggleButtons } from "../config/interface";
+import { IToggleButtons } from "../lib/interface";
 
 const ToggleButtonBox = styled.div`
   display: flex;
