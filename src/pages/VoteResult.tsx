@@ -3,6 +3,7 @@ import { frontList, backList } from "../config/PartList";
 import styled from "styled-components";
 import ToggleButtons from "../components/ToggleButtons";
 import { IPartList } from "../config/interface";
+import VoteResultList from "../components/voteResult/VoteResultList";
 
 const Container = styled.article`
   height: 100vh;
@@ -13,27 +14,6 @@ const Container = styled.article`
 `;
 const VoteList = styled.section`
   margin-top: 2rem;
-`;
-const VoteItem = styled.section`
-  display: flex;
-  justify-content: space-between;
-
-  width: 20rem;
-  font-weight: 200;
-  font-size: 1.5rem;
-
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.7rem;
-
-  border-bottom: 0.01rem solid ${({ theme }) => theme.gray};
-  color: ${({ theme }) => theme.gray};
-`;
-const VoteName = styled.section`
-  padding-left: 0.5rem;
-`;
-const VoteNumber = styled.section`
-  padding-right: 0.5rem;
-  color: ${({ theme }) => theme.red};
 `;
 
 const VoteResult = () => {
@@ -48,13 +28,7 @@ const VoteResult = () => {
     <Container>
       <ToggleButtons curPart={curPart} setCurPart={setCurPart} />
       <VoteList>
-        {partList.length !== 0 &&
-          partList.map((part) => (
-            <VoteItem key={part.id}>
-              <VoteName>{part.name}</VoteName>
-              <VoteNumber>123표</VoteNumber>
-            </VoteItem>
-          ))}
+        {partList.length !== 0 && <VoteResultList partList={partList} />}
       </VoteList>
     </Container>
   );

@@ -9,3 +9,7 @@ export interface IPartList {
   id: number;
   name: string;
 }
+
+export interface IVoteList {
+  partList: IPartList[];
+}
