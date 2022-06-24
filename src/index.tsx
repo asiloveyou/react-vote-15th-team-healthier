@@ -9,7 +9,7 @@ import VoteResult from "./pages/VoteResult";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import GlobalStyle from "./Global.css";
-import theme from "./config/theme";
+import theme from "./lib/theme";
 import { ThemeProvider } from "styled-components";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { frontList, backList } from "../config/PartList";
 import styled from "styled-components";
 import ToggleButtons from "../components/ToggleButtons";
-import { IPartList } from "../config/interface";
+import { IPartList } from "../lib/interface";
+import VoteResultList from "../components/voteResult/VoteResultList";
 
 const Container = styled.article`
   height: 100vh;
@@ -14,47 +14,30 @@ const Container = styled.article`
 const VoteList = styled.section`
   margin-top: 2rem;
 `;
-const VoteItem = styled.section`
-  display: flex;
-  justify-content: space-between;
-
-  width: 20rem;
-  font-weight: 200;
-  font-size: 1.5rem;
-
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.7rem;
-
-  border-bottom: 0.01rem solid ${({ theme }) => theme.gray};
-  color: ${({ theme }) => theme.gray};
-`;
-const VoteName = styled.section`
-  padding-left: 0.5rem;
-`;
-const VoteNumber = styled.section`
-  padding-right: 0.5rem;
-  color: ${({ theme }) => theme.red};
-`;
 
 const VoteResult = () => {
-  const [curPart, setCurPart] = useState(1);
+  const [curPart, setCurPart] = useState("f");
   const [partList, setPartList] = useState<IPartList[]>([]);
 
   useEffect(() => {
-    setPartList(curPart === 1 ? frontList : backList);
+    let resultList = [] as IPartList[];
+
+    fetch(
+      `http://ec2-43-200-125-15.ap-northeast-2.compute.amazonaws.com:80/api/vote/${curPart}`
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        resultList = response;
+        resultList.sort((a, b) => b.vote_num - a.vote_num);
+        setPartList(resultList);
+      });
   }, [curPart]);
 
   return (
     <Container>
       <ToggleButtons curPart={curPart} setCurPart={setCurPart} />
       <VoteList>
-        {partList.length !== 0 &&
-          partList.map((part) => (
-            <VoteItem key={part.id}>
-              <VoteName>{part.name}</VoteName>
-              <VoteNumber>123표</VoteNumber>
-            </VoteItem>
-          ))}
+        {partList.length !== 0 && <VoteResultList partList={partList} />}
       </VoteList>
     </Container>
   );
