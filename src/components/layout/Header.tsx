@@ -2,6 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { getCookieToken, removeCookieToken } from "../../lib/cookie";
+import { DELETE_TOKEN } from "../../store/auth";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div`
   position: absolute;
@@ -83,10 +86,16 @@ const LoginTab = styled(Tab)`
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const isAuthenticated = useSelector(
     (state: any) => state.authToken.authenticated
   );
-  console.log(isAuthenticated);
+
+  async function logout() {
+    dispatch(DELETE_TOKEN());
+    removeCookieToken();
+    return navigate("/");
+  }
 
   return (
     <Container>
@@ -101,7 +110,7 @@ const Header = () => {
         <Tab onClick={() => navigate("/vote")}>투표하기</Tab>
         <Tab onClick={() => navigate("/voteResult")}>결과보기</Tab>
         {isAuthenticated ? (
-          <LoginTab onClick={() => navigate("/")}>로그아웃</LoginTab>
+          <LoginTab onClick={() => logout()}>로그아웃</LoginTab>
         ) : (
           <LoginTab onClick={() => navigate("/login")}>로그인</LoginTab>
         )}
