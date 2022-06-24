@@ -32,6 +32,7 @@ const Text = styled.section<{ delay: number }>`
 `;
 const HighLight = styled.span`
   color: ${({ theme }) => theme.light_green};
+  font-weight: 400;
 `;
 
 const HomePage = () => {
@@ -39,7 +40,7 @@ const HomePage = () => {
     <Container>
       <Text delay={0}>당신의</Text>
       <Text delay={0.7}>
-        <HighLight>프짱</HighLight>/<HighLight>백짱</HighLight>에게
+        <HighLight>파트장</HighLight>에게
       </Text>
       <Text delay={1.4}>지금 바로</Text>
       <Text delay={2.1}>투표하세요!</Text>
