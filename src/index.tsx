@@ -11,24 +11,31 @@ import HomePage from "./pages/HomePage";
 import GlobalStyle from "./Global.css";
 import theme from "./lib/theme";
 import { ThemeProvider } from "styled-components";
+import { Provider } from "react-redux";
+import store from "./store";
+import { CookiesProvider } from "react-cookie";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route path="" element={<HomePage />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<SignUp />} />
-            <Route path="vote" element={<VotePage />} />
-            <Route path="voteResult" element={<VoteResult />} />
-            <Route path="*" element={<ErrorPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <CookiesProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<App />}>
+                <Route path="" element={<HomePage />} />
+                <Route path="login" element={<Login />} />
+                <Route path="signup" element={<SignUp />} />
+                <Route path="vote" element={<VotePage />} />
+                <Route path="voteResult" element={<VoteResult />} />
+                <Route path="*" element={<ErrorPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
+    </CookiesProvider>
   </React.StrictMode>
 );

@@ -16,3 +16,16 @@ export interface IVoteList {
   curPart: string;
   partList: IPartList[];
 }
+
+export interface ILoginServerResponse {
+  user: string;
+  message: string;
+  refresh: string;
+  access: string;
+}
+
+export interface authState {
+  authenticated: boolean;
+  accessToken: any;
+  expireTime: any;
+}
