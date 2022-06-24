@@ -143,7 +143,7 @@ function Login() {
   const sendLoginRequest = useCallback(
     async (link: string, id: string, pw: string) => {
       const response = await customPost(link, { username: id, password: pw });
-
+      console.log(response);
       if (response.message === "Login Success") {
         // 쿠키에 Refresh Token, store에 Access Token 저장
         setRefreshToken(response.refresh);

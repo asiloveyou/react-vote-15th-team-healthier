@@ -180,11 +180,11 @@ function SignUp() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (siwon == 2) {
+    if (siwon === -1) {
+      alert("시원을 고르세요");
+    } else if (siwon !== 2) {
       alert("올바른 시원을 고르세요");
       return;
-    } else if (siwon == -1) {
-      alert("시원을 고르세요");
     }
     sendSignUpRequest(
       "http://ec2-43-200-125-15.ap-northeast-2.compute.amazonaws.com/api/signup",
@@ -217,7 +217,7 @@ function SignUp() {
             <Input
               type="text"
               placeholder="이메일"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => onChangeEmail(e.target.value)}
             ></Input>
             <Description>아이디</Description>
             <Input
@@ -227,7 +227,7 @@ function SignUp() {
             ></Input>
             <Description>비밀번호</Description>
             <Input
-              type="text"
+              type="password"
               placeholder="비밀번호"
               onChange={(e) => onChangePassword(e.target.value)}
             ></Input>

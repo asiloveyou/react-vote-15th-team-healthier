@@ -3,6 +3,7 @@ import { IVoteList } from "../../lib/interface";
 import styled from "styled-components";
 import Heart from "../Heart";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const VoteName = styled.button`
   font-size: 1.5rem;
@@ -48,6 +49,10 @@ const VoteItem = styled.section<{ voteNumber: number; part: number }>`
 
 const VoteCandidateList = ({ curPart, partList }: IVoteList) => {
   const [voteNumber, setVoteNumber] = useState(-1);
+  const isAuthenticated = useSelector(
+    (state: any) => state.authToken.authenticated
+  );
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,16 +62,16 @@ const VoteCandidateList = ({ curPart, partList }: IVoteList) => {
   }, [voteNumber]);
 
   const handleVoting = (id: number): void => {
-    fetch(
-      `http://ec2-43-200-125-15.ap-northeast-2.compute.amazonaws.com:80/api/vote/${curPart}/${id}`
-    )
-      .then(() => {
+    if (isAuthenticated) {
+      fetch(
+        `http://ec2-43-200-125-15.ap-northeast-2.compute.amazonaws.com:80/api/vote/${curPart}/${id}`
+      ).then(() => {
         setVoteNumber(id);
-      })
-      .catch(() => {
-        alert("로그인 먼저 진행해주세요");
-        navigate("/login");
       });
+    } else {
+      alert("로그인 먼저 진행해주세요");
+      navigate("/login");
+    }
   };
 
   return (
