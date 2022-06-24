@@ -46,6 +46,12 @@ const Logo = styled.img`
 
   width: 3rem;
   height: 3rem;
+
+  &:hover {
+    -webkit-filter: brightness(80%) grayscale(10%);
+    filter: brightness(80%) grayscale(10%);
+    transition: 0.5s;
+  }
 `;
 const LogoTitle = styled.h1`
   font-size: 1.3rem;
@@ -81,8 +87,8 @@ const Header = () => {
 
   return (
     <Container>
-      <LeftContent>
-        <Logo src="/healthier_logo.png" onClick={() => navigate("/")} />
+      <LeftContent onClick={() => navigate("/")}>
+        <Logo src="/healthier_logo.png" />
         <LogoTitle>
           Team <br />
           Healthier
