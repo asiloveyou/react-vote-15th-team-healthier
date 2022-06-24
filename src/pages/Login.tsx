@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { IoLogInOutline } from "react-icons/io5";
 
 const Container = styled.div`
   height: 100vh;
@@ -22,23 +23,23 @@ const ModalContainer = styled.div`
   align-items: center;
 
   padding: 1rem;
-  border-radius: 2rem;
+  border-radius: 0.2rem;
 
-  background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 0.4rem 0.5rem 0.04rem rgba(0, 0, 0, 0.02);
 `;
 
 const Button = styled.button`
   width: 40vw;
-  max-width: 10rem;
+  max-width: 10.5rem;
 
   background-color: rgba(255, 255, 255, 1);
   box-shadow: 0 0.4rem 0.5rem 0.04rem rgba(0, 0, 0, 0.02);
   border: none;
-  border-radius: 1rem;
+  border-radius: 0.2rem;
 
   padding: 1rem;
-  margin: 0.5rem;
+  margin: 2rem 0.5rem;
+  font-size: 0.8rem;
 
   cursor: pointer;
   outline: inherit;
@@ -47,28 +48,41 @@ const Button = styled.button`
 const LoginButton = styled(Button)`
   background-color: ${({ theme }) => theme.blue};
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &:hover {
-    box-shadow: 0 0 0.5rem 0.04rem rgba(0, 0, 0, 0.2);
+    background-color: ${({ theme }) => theme.light_green};
+    color: black;
+    transition: 0.5s;
   }
 `;
 
 const SignUpButton = styled(Button)`
   background-color: ${({ theme }) => theme.light_blue};
   color: ${({ theme }) => theme.blue};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &:hover {
-    box-shadow: 0 0 0.5rem 0.04rem rgba(0, 0, 0, 0.2);
+    -webkit-filter: brightness(80%) grayscale(10%);
+    filter: brightness(80%) grayscale(10%);
+    transition: 0.5s;
   }
 `;
 
 const Input = styled.input`
   width: 80vw;
-  max-width: 19rem;
+  max-width: 20rem;
 
   padding: 1rem;
-  margin: 0.5rem;
+  margin: 0 0.5rem;
 
-  border-radius: 1rem;
+  border-radius: 0.2rem;
   border: none;
+  font-size: 0.8rem;
 
   &:hover {
     box-shadow: 0 0 0.5rem 0.04rem rgba(0, 0, 0, 0.2);
@@ -97,6 +111,22 @@ const Title = styled.div`
   // font-size: 4rem;
   font-weight: 200;
 `;
+const Description = styled.p`
+  font-size: 0.8rem;
+  color: white;
+  margin: 1rem 0.5rem 0.5rem 0.5rem;
+`;
+const Appendix = styled.p`
+  font-size: 0.8rem;
+  color: white;
+  margin: 0.5rem 0rem;
+`;
+const AppendixLink = styled.span`
+  color: ${({ theme }) => theme.blue};
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 function Login() {
   const [username, setUserName] = useState<string>();
@@ -110,15 +140,17 @@ function Login() {
 
   return (
     <Container>
-      <Title>오늘도 반가워</Title>
+      <Title>로그인 하기</Title>
       <ModalContainer>
         <Form onSubmit={handleSubmit}>
           <InputSection>
+            <Description>아이디</Description>
             <Input
               type="text"
               placeholder="아이디"
               onChange={(e) => setUserName(e.target.value)}
             ></Input>
+            <Description>비밀번호</Description>
             <Input
               type="password"
               placeholder="비밀번호"
@@ -129,15 +161,27 @@ function Login() {
             <SignUpButton
               type="button"
               onClick={() => {
-                console.log("clicked");
                 navigate("/signup");
               }}
             >
               회원가입
             </SignUpButton>
-            <LoginButton type="submit">로그인</LoginButton>
+            <LoginButton type="submit">
+              로그인
+              <IoLogInOutline style={{ fontSize: "1.1rem" }} />
+            </LoginButton>
           </ButtonSection>
         </Form>
+        <Appendix>
+          비밀번호를 잊으셨나요?{"    "}
+          <AppendixLink
+            onClick={() => {
+              alert("잘 챙기고 다니세요");
+            }}
+          >
+            비밀번호 찾기
+          </AppendixLink>
+        </Appendix>
       </ModalContainer>
     </Container>
   );
