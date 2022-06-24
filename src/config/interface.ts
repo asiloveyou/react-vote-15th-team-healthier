@@ -13,3 +13,9 @@ export interface IPartList {
 export interface IVoteList {
   partList: IPartList[];
 }
+
+export interface IVoteResultList {
+  part: number;
+  candidatename: string;
+  vote_number: number;
+}

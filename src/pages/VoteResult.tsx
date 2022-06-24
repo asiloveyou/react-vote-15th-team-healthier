@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { frontList, backList } from "../config/PartList";
 import styled from "styled-components";
 import ToggleButtons from "../components/ToggleButtons";
-import { IPartList } from "../config/interface";
+import { IVoteResultList } from "../config/interface";
 import VoteResultList from "../components/voteResult/VoteResultList";
 
 const Container = styled.article`
@@ -18,10 +18,28 @@ const VoteList = styled.section`
 
 const VoteResult = () => {
   const [curPart, setCurPart] = useState(1);
-  const [partList, setPartList] = useState<IPartList[]>([]);
+  const [partList, setPartList] = useState<IVoteResultList[]>([]);
 
   useEffect(() => {
-    setPartList(curPart === 1 ? frontList : backList);
+    let resultList = [] as IVoteResultList[];
+
+    fetch("/api/result", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        part: curPart,
+      }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        resultList = [...response.candidate];
+      });
+
+    resultList.sort((a, b) => b.vote_number - a.vote_number);
+    setPartList(resultList);
   }, [curPart]);
 
   return (

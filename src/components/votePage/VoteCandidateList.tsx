@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { IVoteList } from "../../config/interface";
 import styled from "styled-components";
 import Heart from "../Heart";
+import { useNavigate } from "react-router-dom";
 
 const VoteName = styled.button`
   font-size: 1.5rem;
@@ -47,6 +48,7 @@ const VoteItem = styled.section<{ voteNumber: number; part: number }>`
 
 const VoteCandidateList = ({ partList }: IVoteList) => {
   const [voteNumber, setVoteNumber] = useState(-1);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleVote = setTimeout(() => setVoteNumber(-1), 1000);
@@ -54,8 +56,30 @@ const VoteCandidateList = ({ partList }: IVoteList) => {
     return () => clearTimeout(handleVote);
   }, [voteNumber]);
 
-  const handleVoting = (id: number) => {
-    setVoteNumber(id);
+  const handleVoting = (id: number): void => {
+    fetch("/api/vote", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        candidate_id: id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        if (response.message === "success") {
+          setVoteNumber(id);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.message === "login_first") {
+          alert("로그인 먼저 진행해주세요");
+          navigate("/login");
+        }
+      });
   };
 
   return (
