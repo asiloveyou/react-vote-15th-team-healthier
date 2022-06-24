@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   position: absolute;
@@ -82,6 +83,10 @@ const LoginTab = styled(Tab)`
 
 const Header = () => {
   const navigate = useNavigate();
+  const isAuthenticated = useSelector(
+    (state: any) => state.authToken.authenticated
+  );
+  console.log(isAuthenticated);
 
   return (
     <Container>
@@ -95,7 +100,11 @@ const Header = () => {
       <RightContent>
         <Tab onClick={() => navigate("/vote")}>투표하기</Tab>
         <Tab onClick={() => navigate("/voteResult")}>결과보기</Tab>
-        <LoginTab onClick={() => navigate("/login")}>로그인</LoginTab>
+        {isAuthenticated ? (
+          <LoginTab onClick={() => navigate("/")}>로그아웃</LoginTab>
+        ) : (
+          <LoginTab onClick={() => navigate("/login")}>로그인</LoginTab>
+        )}
       </RightContent>
     </Container>
   );
