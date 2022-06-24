@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Heart from "../Heart";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const VoteName = styled.button`
   font-size: 1.5rem;
@@ -63,7 +64,7 @@ const VoteCandidateList = ({ curPart, partList }: IVoteList) => {
 
   const handleVoting = (id: number): void => {
     if (isAuthenticated) {
-      fetch(
+      axios(
         `http://ec2-43-200-125-15.ap-northeast-2.compute.amazonaws.com:80/api/vote/${curPart}/${id}`
       ).then(() => {
         setVoteNumber(id);

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ToggleButtons from "../components/ToggleButtons";
 import { IPartList } from "../lib/interface";
 import VoteResultList from "../components/voteResult/VoteResultList";
+import axios from "axios";
 
 const Container = styled.article`
   height: 100vh;
@@ -22,15 +23,13 @@ const VoteResult = () => {
   useEffect(() => {
     let resultList = [] as IPartList[];
 
-    fetch(
+    axios(
       `http://ec2-43-200-125-15.ap-northeast-2.compute.amazonaws.com:80/api/vote/${curPart}`
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        resultList = response;
-        resultList.sort((a, b) => b.vote_num - a.vote_num);
-        setPartList(resultList);
-      });
+    ).then((response) => {
+      resultList = response.data;
+      resultList.sort((a, b) => b.vote_num - a.vote_num);
+      setPartList(resultList);
+    });
   }, [curPart]);
 
   return (
