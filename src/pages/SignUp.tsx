@@ -197,7 +197,7 @@ function SignUp() {
                 onClick={() => {
                   setSiwon(0);
                 }}
-                isActive={siwon == 0}
+                isActive={siwon === 0}
               >
                 유시원
               </SelectButton>
@@ -206,7 +206,7 @@ function SignUp() {
                 onClick={() => {
                   setSiwon(1);
                 }}
-                isActive={siwon == 1}
+                isActive={siwon === 1}
               >
                 전시원
               </SelectButton>
@@ -215,7 +215,7 @@ function SignUp() {
                 onClick={() => {
                   setSiwon(2);
                 }}
-                isActive={siwon == 2}
+                isActive={siwon === 2}
               >
                 이시원
               </SelectButton>
