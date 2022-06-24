@@ -1,8 +1,13 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { IoLogInOutline } from "react-icons/io5";
+import { useDispatch } from "react-redux";
+
+import { customPost } from "../lib/post";
+import { setRefreshToken } from "../lib/cookie";
+import { SET_TOKEN } from "../store/auth";
 
 const Container = styled.div`
   height: 100vh;
@@ -129,13 +134,37 @@ const AppendixLink = styled.span`
 `;
 
 function Login() {
-  const [username, setUserName] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const [username, setUserName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const sendLoginRequest = useCallback(
+    async (link: string, id: string, pw: string) => {
+      const response = await customPost(link, { username: id, password: pw });
+
+      if (response.message === "Login Success") {
+        // 쿠키에 Refresh Token, store에 Access Token 저장
+        setRefreshToken(response.refresh);
+        dispatch(SET_TOKEN(response.access));
+        return navigate("/");
+      } else {
+        alert("아이디와 비밀번호를 확인해주세요");
+      }
+    },
+    [customPost, setRefreshToken, dispatch]
+  );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    sendLoginRequest(
+      "http://ec2-43-200-125-15.ap-northeast-2.compute.amazonaws.com/api/login",
+      username!,
+      password!
+    );
+    setUserName("");
+    setPassword("");
   };
 
   return (
