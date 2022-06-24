@@ -227,7 +227,7 @@ function SignUp() {
             ></Input>
             <Description>비밀번호</Description>
             <Input
-              type="text"
+              type="password"
               placeholder="비밀번호"
               onChange={(e) => onChangePassword(e.target.value)}
             ></Input>
