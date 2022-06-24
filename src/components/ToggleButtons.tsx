@@ -5,7 +5,7 @@ import { IToggleButtons } from "../config/interface";
 const ToggleButtonBox = styled.div`
   display: flex;
   align-items: flex-start;
-  margin-top: 7rem;
+  margin-top: 9rem;
 `;
 const ToggleButton = styled.button<{ part: number; curPart: number }>`
   cursor: pointer;
