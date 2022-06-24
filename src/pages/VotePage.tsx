@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { frontList, backList } from "../config/PartList";
 import styled from "styled-components";
 import ToggleButtons from "../components/ToggleButtons";
 import { IPartList } from "../config/interface";
@@ -28,21 +27,37 @@ const VoteComment = styled.p`
 `;
 
 const VotePage = () => {
-  const [curPart, setCurPart] = useState(1);
+  const [curPart, setCurPart] = useState("f");
   const [partList, setPartList] = useState<IPartList[]>([]);
 
   useEffect(() => {
-    setPartList(curPart === 1 ? frontList : backList);
+    let tmpPartList = [] as IPartList[];
+
+    fetch(`/api/vote/${curPart}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        tmpPartList = [...response];
+      });
+
+    setPartList(tmpPartList);
   }, [curPart]);
 
   return (
     <Container>
       <ToggleButtons curPart={curPart} setCurPart={setCurPart} />
       <VoteComment>
-        당신의 {curPart === 1 ? "프" : "백"}짱에게 투표하세요!
+        당신의 {curPart === "f" ? "프" : "백"}짱에게 투표하세요!
       </VoteComment>
       <VoteList>
-        {partList.length !== 0 && <VoteCandidateList partList={partList} />}
+        {partList.length !== 0 && (
+          <VoteCandidateList curPart={curPart} partList={partList} />
+        )}
       </VoteList>
     </Container>
   );

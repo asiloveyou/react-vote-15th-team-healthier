@@ -16,8 +16,6 @@ const Container = styled.div`
 
   background-color: black;
   border-radius: 0.2rem;
-
-  // border-bottom: 0.01rem solid ${({ theme }) => theme.gray};
 `;
 const LeftContent = styled.section`
   display: flex;

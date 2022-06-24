@@ -7,12 +7,12 @@ const ToggleButtonBox = styled.div`
   align-items: flex-start;
   margin-top: 9rem;
 `;
-const ToggleButton = styled.button<{ part: number; curPart: number }>`
+const ToggleButton = styled.button<{ part: string; curPart: string }>`
   cursor: pointer;
 
   border: 0.01rem solid ${({ theme }) => theme.light_green};
   border-radius: ${({ part }) =>
-    part === 1 ? "0.5rem 0 0 0.5rem" : "0 0.5rem 0.5rem 0"};
+    part === "f" ? "0.5rem 0 0 0.5rem" : "0 0.5rem 0.5rem 0"};
 
   background-color: ${({ curPart, part, theme }) =>
     curPart === part ? theme.light_green : theme.black};
@@ -31,18 +31,18 @@ const ToggleButtons = ({ curPart, setCurPart }: IToggleButtons) => {
   return (
     <ToggleButtonBox>
       <ToggleButton
-        disabled={curPart === 1}
-        part={1}
+        disabled={curPart === "f"}
+        part={"f"}
         curPart={curPart}
-        onClick={() => setCurPart(1)}
+        onClick={() => setCurPart("f")}
       >
         프론트엔드
       </ToggleButton>
       <ToggleButton
-        disabled={curPart === 2}
-        part={2}
+        disabled={curPart === "b"}
+        part={"b"}
         curPart={curPart}
-        onClick={() => setCurPart(2)}
+        onClick={() => setCurPart("b")}
       >
         백엔드
       </ToggleButton>

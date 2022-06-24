@@ -1,21 +1,18 @@
 import { Dispatch } from "react";
 
 export interface IToggleButtons {
-  curPart: number;
-  setCurPart: Dispatch<number>;
+  curPart: string;
+  setCurPart: Dispatch<string>;
 }
 
 export interface IPartList {
   id: number;
+  part: string;
   name: string;
+  vote_num: number;
 }
 
 export interface IVoteList {
+  curPart: string;
   partList: IPartList[];
-}
-
-export interface IVoteResultList {
-  part: number;
-  candidatename: string;
-  vote_number: number;
 }

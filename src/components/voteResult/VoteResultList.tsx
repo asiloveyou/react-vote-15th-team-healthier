@@ -1,5 +1,5 @@
 import React from "react";
-import { IVoteResultList } from "../../config/interface";
+import { IPartList } from "../../config/interface";
 import styled, { keyframes } from "styled-components";
 
 const VoteResultAnimation = keyframes`
@@ -39,13 +39,13 @@ const VoteNumber = styled.section`
   color: ${({ theme }) => theme.red};
 `;
 
-const VoteResultList = ({ partList }: { partList: IVoteResultList[] }) => {
+const VoteResultList = ({ partList }: { partList: IPartList[] }) => {
   return (
     <>
       {partList.map((part, idx) => (
         <VoteItem key={idx} delay={idx * 0.4}>
-          <VoteName>{part.candidatename}</VoteName>
-          <VoteNumber>{part.vote_number}표</VoteNumber>
+          <VoteName>{part.name}</VoteName>
+          <VoteNumber>{part.vote_num}표</VoteNumber>
         </VoteItem>
       ))}
     </>

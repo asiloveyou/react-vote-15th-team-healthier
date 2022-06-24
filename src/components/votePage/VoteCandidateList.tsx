@@ -46,7 +46,7 @@ const VoteItem = styled.section<{ voteNumber: number; part: number }>`
   }
 `;
 
-const VoteCandidateList = ({ partList }: IVoteList) => {
+const VoteCandidateList = ({ curPart, partList }: IVoteList) => {
   const [voteNumber, setVoteNumber] = useState(-1);
   const navigate = useNavigate();
 
@@ -57,28 +57,21 @@ const VoteCandidateList = ({ partList }: IVoteList) => {
   }, [voteNumber]);
 
   const handleVoting = (id: number): void => {
-    fetch("/api/vote", {
-      method: "POST",
+    fetch(`/api/vote/${curPart}/${id}`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        candidate_id: id,
-      }),
     })
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
-        if (response.message === "success") {
-          setVoteNumber(id);
-        }
+        setVoteNumber(id);
       })
       .catch((err) => {
         console.log(err);
-        if (err.message === "login_first") {
-          alert("로그인 먼저 진행해주세요");
-          navigate("/login");
-        }
+        alert("로그인 먼저 진행해주세요");
+        navigate("/login");
       });
   };
 
