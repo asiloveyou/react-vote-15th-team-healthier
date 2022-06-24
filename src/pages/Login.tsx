@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { IoLogInOutline } from "react-icons/io5";
 
 const Container = styled.div`
   height: 100vh;
@@ -47,16 +48,28 @@ const Button = styled.button`
 const LoginButton = styled(Button)`
   background-color: ${({ theme }) => theme.blue};
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &:hover {
-    box-shadow: 0 0 0.5rem 0.04rem rgba(0, 0, 0, 0.2);
+    background-color: ${({ theme }) => theme.light_green};
+    color: black;
+    transition: 0.5s;
   }
 `;
 
 const SignUpButton = styled(Button)`
   background-color: ${({ theme }) => theme.light_blue};
   color: ${({ theme }) => theme.blue};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &:hover {
-    box-shadow: 0 0 0.5rem 0.04rem rgba(0, 0, 0, 0.2);
+    -webkit-filter: brightness(80%) grayscale(10%);
+    filter: brightness(80%) grayscale(10%);
+    transition: 0.5s;
   }
 `;
 
@@ -153,7 +166,10 @@ function Login() {
             >
               회원가입
             </SignUpButton>
-            <LoginButton type="submit">로그인</LoginButton>
+            <LoginButton type="submit">
+              로그인
+              <IoLogInOutline style={{ fontSize: "1.1rem" }} />
+            </LoginButton>
           </ButtonSection>
         </Form>
         <Appendix>
