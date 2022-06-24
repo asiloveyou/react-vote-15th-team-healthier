@@ -31,21 +31,13 @@ const VotePage = () => {
   const [partList, setPartList] = useState<IPartList[]>([]);
 
   useEffect(() => {
-    let tmpPartList = [] as IPartList[];
-
-    fetch(`/api/vote/${curPart}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      `http://ec2-43-200-125-15.ap-northeast-2.compute.amazonaws.com:80/api/vote/${curPart}`
+    )
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
-        tmpPartList = [...response];
+        setPartList(response);
       });
-
-    setPartList(tmpPartList);
   }, [curPart]);
 
   return (

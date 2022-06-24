@@ -22,20 +22,15 @@ const VoteResult = () => {
   useEffect(() => {
     let resultList = [] as IPartList[];
 
-    fetch(`/api/vote/${curPart}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      `http://ec2-43-200-125-15.ap-northeast-2.compute.amazonaws.com:80/api/vote/${curPart}`
+    )
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
-        resultList = [...response];
+        resultList = response;
+        resultList.sort((a, b) => b.vote_num - a.vote_num);
+        setPartList(resultList);
       });
-
-    resultList.sort((a, b) => b.vote_num - a.vote_num);
-    setPartList(resultList);
   }, [curPart]);
 
   return (

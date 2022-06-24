@@ -6,12 +6,14 @@ const VoteResultAnimation = keyframes`
   0% {
     clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
     transform: translateY(100%);
+    opacity: 0;
   }
   95% {
-      transform: translateY(0%);
+    transform: translateY(0%);
   }
   100% {
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 1;
   }
 `;
 const VoteItem = styled.section<{ delay: number }>`

@@ -57,19 +57,13 @@ const VoteCandidateList = ({ curPart, partList }: IVoteList) => {
   }, [voteNumber]);
 
   const handleVoting = (id: number): void => {
-    fetch(`/api/vote/${curPart}/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
+    fetch(
+      `http://ec2-43-200-125-15.ap-northeast-2.compute.amazonaws.com:80/api/vote/${curPart}/${id}`
+    )
+      .then(() => {
         setVoteNumber(id);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         alert("로그인 먼저 진행해주세요");
         navigate("/login");
       });
