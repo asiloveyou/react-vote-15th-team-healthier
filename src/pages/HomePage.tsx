@@ -1,5 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
+import Stars from "../components/Stars";
+import { Canvas } from "@react-three/fiber";
 
 const TextAnimation = keyframes`
   0% {
@@ -17,6 +19,8 @@ const TextAnimation = keyframes`
 `;
 const Container = styled.section`
   height: 100vh;
+  width: 100vw;
+  position: absolute;
 
   display: flex;
   flex-direction: column;
@@ -31,22 +35,35 @@ const Text = styled.section<{ delay: number }>`
   animation-delay: ${({ delay }) => delay}s;
 
   margin-bottom: 1rem;
+  font-size: 3rem;
 `;
 const HighLight = styled.span`
   color: ${({ theme }) => theme.light_green};
   font-weight: 400;
 `;
+const CanvasContainer = styled.div`
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+`;
 
 const HomePage = () => {
   return (
-    <Container>
-      <Text delay={0}>당신의</Text>
-      <Text delay={0.7}>
-        <HighLight>파트장</HighLight>에게
-      </Text>
-      <Text delay={1.4}>지금 바로</Text>
-      <Text delay={2.1}>투표하세요!</Text>
-    </Container>
+    <>
+      <CanvasContainer>
+        <Canvas camera={{ position: [0, 0, 1] }}>
+          <Stars />
+        </Canvas>
+      </CanvasContainer>
+      <Container>
+        <Text delay={0}>당신의</Text>
+        <Text delay={0.7}>
+          <HighLight>파트장</HighLight>에게
+        </Text>
+        <Text delay={1.4}>지금 바로</Text>
+        <Text delay={2.1}>투표하세요!</Text>
+      </Container>
+    </>
   );
 };
 
